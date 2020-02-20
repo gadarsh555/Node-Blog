@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Add Post</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -47,9 +47,9 @@
       
       <ul class="nav nav-pills nav-stacked" style="font-size:3vh;">
         <li ><a href="/login/<%= user.username %>/home">Home</a></li>
-        <li><a href="/login/<%= user.username %>/people?profileimage=<%= user.profileimage %>">People</a></li>
-        <li><a href="/login/<%= user.username %>/photos?profileimage=<%= user.profileimage %>">Photos</a></li>
-        <li class="active"><a href="/login/<%= user.username %>/addPost?profileimage=<%= user.profileimage %>">Add Post</a></li>
+        <li><a href="/login/<%= user.username %>/people?name=<%= user.name %>&profileimage=<%= user.profileimage %>">People</a></li>
+        <li><a href="/login/<%= user.username %>/photos?name=<%= user.name %>&profileimage=<%= user.profileimage %>">Photos</a></li>
+        <li class="active"><a href="/login/<%= user.username %>/addPost?name=<%= user.name %>&profileimage=<%= user.profileimage %>">Add Post</a></li>
         <li><a style="color: red;font-weight: 900;" href="/login/<%= user.username %>/logout">Logout</a></li>
       </ul><br>
       <% } %>

@@ -94,11 +94,29 @@ router.get('/:id/people', checkSignIn,function(err,req,res,next){
 },function(req,res){
   var user = {
     "username" : req.params.id,
+    "name" : req.query.name,
     "profileimage" : req.query.profileimage
  };
   console.log("successfully reached in people with authentucatiuon");
   console.log("user data in people :",user);
-  res.render('people',{user:user});
+  User.find({},(err,people)=>{
+    if(err){
+      console.log("error in finding people : ",err);
+      res.render('people',{user:user,peopleStatus : "Cannot find people due to an error"});
+    }//if
+    else if(people.length > 0){
+      console.log("people found successfully ");
+      res.render('people',{user:user,people:people,peopleStatus : "People Available are :"});
+    }//elseif
+    else if(people.length == 0){
+      console.log("no people found successfully ");
+      res.render('people',{user:user,peopleStatus : "No People are Available Around You :"});
+    }//elseif
+    else{
+      res.render('people',{user:user,peopleStatus : "No people found around you"});
+    }//else
+  });//userfind
+  /* res.render('people',{user:user}); */
 });
 
 router.get('/:id/addPost', checkSignIn,function(err,req,res,next){
@@ -108,6 +126,7 @@ router.get('/:id/addPost', checkSignIn,function(err,req,res,next){
 },function(req,res){
   var user = {
     "username" : req.params.id,
+    "name" : req.query.name,
     "profileimage" : req.query.profileimage
  };
   console.log("successfully reached in addPost with authentucatiuon");
@@ -159,6 +178,7 @@ router.post('/:id/addPost', checkSignIn , function(err,req,res,next){
   
   var user = {
     "username" : req.params.id,
+    "name" : req.query.name,
     "profileimage" : req.query.profileimage
  };
  var post = new Post(req.body);
@@ -185,6 +205,7 @@ router.get('/:id/photos', checkSignIn,function(err,req,res,next){
 },function(req,res){
   var user = {
     "username" : req.params.id,
+    "name" : req.query.name,
     "profileimage" : req.query.profileimage
  };
   console.log("successfully reached in photos with authentucatiuon");
@@ -193,9 +214,13 @@ router.get('/:id/photos', checkSignIn,function(err,req,res,next){
       console.log("error:",err);
       res.render('photos',{user:user,photoStatus : "Error in getting your Photos"});
     }//if
-    else if(post){
+    else if(post.length > 0){
       console.log("got all your photos:",post);
       res.render('photos',{user:user,post : post,photoStatus : "Successfully got your Photos"});
+    }//elseif
+    else if(post.length == 0){
+      console.log("you have no photos:",post);
+      res.render('photos',{user:user,photoStatus : "You Have No Photos"});
     }//elseif
     else{
       console.log("you have no photos:",post);

@@ -1,8 +1,8 @@
-<% var user; %>
+<% var user,peopleStatus,people; %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>People</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -47,9 +47,9 @@
       
       <ul class="nav nav-pills nav-stacked" style="font-size:3vh;">
         <li ><a href="/login/<%= user.username %>/home">Home</a></li>
-        <li class="active"><a href="/login/<%= user.username %>/people?profileimage=<%= user.profileimage %>">People</a></li>
-        <li><a href="/login/<%= user.username %>/photos?profileimage=<%= user.profileimage %>">Photos</a></li>
-        <li ><a href="/login/<%= user.username %>/addPost?profileimage=<%= user.profileimage %>">Add Post</a></li>
+        <li class="active"><a href="/login/<%= user.username %>/people?name=<%= user.name %>&profileimage=<%= user.profileimage %>">People</a></li>
+        <li><a href="/login/<%= user.username %>/photos?name=<%= user.name %>&profileimage=<%= user.profileimage %>">Photos</a></li>
+        <li ><a href="/login/<%= user.username %>/addPost?name=<%= user.name %>&profileimage=<%= user.profileimage %>">Add Post</a></li>
         <li><a style="color: red;font-weight: 900;" href="/login/<%= user.username %>/logout">Logout</a></li>
       </ul><br>
       <% } %>
@@ -66,7 +66,37 @@
     <div class="col-sm-9" style="margin-left:25%;">
       <h4><small>PEOPLE AROUND YOU</small></h4>
       <hr>
-      
+      <div style="font-size: larger;color: chartreuse;font-weight: 900;">
+        <% if(peopleStatus){ %>
+           <%= peopleStatus %>
+         <% } %>
+         <hr>
+     </div>
+     <div class="container-fluid" style="font-size: larger;font-weight: 500;color: darkblue;">
+     <div class="row">
+      <div class="col-md-3 ">Name</div>
+      <div class="col-md-6 ">Username</div>
+      <div class="col-md-3 ">Profile Picture</div>
+    </div>
+  </div>
+  <hr>
+      <% if(people){ %>
+      <div class="container-fluid" style="font-size:larger;font-weight: 800;">
+       <% for(var i=0;i<people.length;i++){ %>
+        <div class="row" style="border-bottom:1px solid lightgrey;">
+          <div class="col-md-3 "><%= people[i].name %></div>
+          <div class="col-md-6 ">
+            <a href="#">
+            <%= people[i].username %>
+            </a>
+          </div>
+          <div class="col-md-3 ">
+            <img style="width:100px;height:100px;margin:5px;" src="<%= people[i].profileimage %>">
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <% } %>
          
     </div>
   </div>
