@@ -1,4 +1,4 @@
-<% var user; %>
+<% var user,post,photoStatus; %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,8 +66,38 @@
     <div class="col-sm-9" style="margin-left:25%;">
       <h3 style="font-weight: 900;">Your Uploaded Photos</h3>
       <hr>
-      
-         
+      <div style="font-size: larger;color: chartreuse;font-weight: 900;">
+        <% if(photoStatus){ %>
+           <%= photoStatus %>
+         <% } %>
+         <hr>
+     </div>
+      <!-- photos section -->
+      <!-- Container -->
+<div class="container">
+  <!-- Projects Row -->
+  <div class="row">
+    <% if(post) { %>
+    <% for(var i=0;i<post.length;i++){ %>
+    <div class="col-md-4 portfolio-item">
+      <a href="#">
+        <img style="width:400px;height:300px;" class="img-responsive" src="<%= post[i].postimage %>">
+      </a>
+      <center>
+      <h3>Title : <%= post[i].title %></h3>
+    </center>
+    </div>
+    <% } %>
+    <% } %>
+  </div>
+  <!-- /.row -->
+  <hr>
+  <!-- /.row -->
+  <hr>
+</div>
+<!-- /.container -->
+
+      <!-- photos section -->
     </div>
   </div>
 </div>

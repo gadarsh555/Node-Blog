@@ -188,7 +188,21 @@ router.get('/:id/photos', checkSignIn,function(err,req,res,next){
     "profileimage" : req.query.profileimage
  };
   console.log("successfully reached in photos with authentucatiuon");
-  res.render('photos',{user:user});
+  Post.find({"postedby" : req.params.id },(err,post)=>{
+    if(err){
+      console.log("error:",err);
+      res.render('photos',{user:user,photoStatus : "Error in getting your Photos"});
+    }//if
+    else if(post){
+      console.log("got all your photos:",post);
+      res.render('photos',{user:user,post : post,photoStatus : "Successfully got your Photos"});
+    }//elseif
+    else{
+      console.log("you have no photos:",post);
+      res.render('photos',{user:user,photoStatus : "You Have No Photos"});
+    }
+  });
+  /* res.render('photos',{user:user}); */
 });
 
 // Logout endpoint
