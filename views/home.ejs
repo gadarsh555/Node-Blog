@@ -4,9 +4,9 @@
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="/javascripts/bootstrap.js"></script>
+  <script src="/javascripts/jquery.js"></script>
+  <link rel="stylesheet" href="/stylesheets/bootstrap.css">
   <style>
     /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
     .row.content {height: 1500px}
@@ -41,13 +41,15 @@
     <div class="col-sm-3 sidenav" style="position:fixed;">
       <% if(user){ %>
     <center>
-      <img style="width:250px;height:250px;margin:10px;" src="<%= user.profileimage %>" alt="../../../uploads/noimage.png">
+      <img style="width:380px;height:220px;margin:10px;" src="<%= user.profileimage %>" alt="../../../uploads/noimage.png">
       <b><h3><%= user.name %></h3></b></center>
-      <ul class="nav nav-pills nav-stacked" style="font-size:3vh;">
+      <ul class="nav nav-pills nav-stacked" style="font-size:2.7vh;">
         <li class="active"><a href="#">Home</a></li>
         <li><a href="/login/<%= user.username %>/people?name=<%= user.name %>&profileimage=<%= user.profileimage %>">People</a></li>
+        <li><a href="/login/<%= user.username %>/connect?name=<%= user.name %>&profileimage=<%= user.profileimage %>">Connect Requests</a></li>
         <li><a href="/login/<%= user.username %>/photos?name=<%= user.name %>&profileimage=<%= user.profileimage %>">Photos</a></li>
         <li><a href="/login/<%= user.username %>/addPost?name=<%= user.name %>&profileimage=<%= user.profileimage %>">Add Post</a></li>
+        
         <li><a style="color: red;font-weight: 900;" href="/login/<%= user.username %>/logout">Logout</a></li>
       </ul><br>
       <% } %>

@@ -12,6 +12,7 @@ var bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
 /* var usersRouter = require('./routes/users'); */
 var loginRouter = require('./routes/login');
+var friendRouter = require('./routes/friend');
 
 var app = express();
 
@@ -68,6 +69,7 @@ app.use(expressValidator({
 app.use('/', indexRouter);
 //app.use('/users', usersRouter);
 app.use('/login',loginRouter);
+app.use('/login',friendRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -27,7 +27,7 @@
     <form method="POST" action="/" enctype="multipart/form-data">
       <div class="form-group">
         <label >Name</label>
-        <input type="text" class="form-control" name="name" required placeholder="Enter Name" 
+        <input type="text" class="form-control" name="name" style="text-transform: capitalize;" required placeholder="Enter Name" 
           <% if(formData){ %> value="<%- formData.name %>" <% } %>>
       </div>
       <div class="form-group">
