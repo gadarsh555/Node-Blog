@@ -4,7 +4,8 @@ var uniqueValidator = require('mongoose-unique-validator');
 mongoose.connect('mongodb://localhost/nodeblog',{
     useNewUrlParser: true,
    useCreateIndex: true,
-   useUnifiedTopology: true 
+   useUnifiedTopology: true,
+    useFindAndModify: false 
 });
 
 var db = mongoose.connection;
@@ -14,10 +15,14 @@ var db = mongoose.connection;
 var RequestSchema = mongoose.Schema({
     user : {
         type : String,
+        unique : true,
         require : true
     },
     request :[{
-        username : String,
+        username : {
+            type : String,
+            unique : false
+        },
         name : String,
         profileimage : String
     }]

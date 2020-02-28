@@ -13,6 +13,7 @@ var indexRouter = require('./routes/index');
 /* var usersRouter = require('./routes/users'); */
 var loginRouter = require('./routes/login');
 var friendRouter = require('./routes/friend');
+var friendRouter = require('./routes/feed');
 
 var app = express();
 

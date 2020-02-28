@@ -1,4 +1,4 @@
-<% var user,requestStatus,connect,connectRequest; %>
+<% var user,friendStatus,people; %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,11 +47,11 @@
       
       <ul class="nav nav-pills nav-stacked" style="font-size:2.7vh;">
         <li ><a href="/login/<%= user.username %>/home">Home</a></li>
-        <li ><a href="/login/<%= user.username %>/people?name=<%= user.name %>&profileimage=<%= user.profileimage %>">People</a></li>
-        <li class="active"><a href="/login/<%= user.username %>/connect?name=<%= user.name %>&profileimage=<%= user.profileimage %>">Connect Requests</a></li>
-        <li><a href="/login/<%= user.username %>/connected?name=<%= user.name %>&profileimage=<%= user.profileimage %>">Connected People</a></li>
+        <li><a href="/login/<%= user.username %>/people?name=<%= user.name %>&profileimage=<%= user.profileimage %>">People</a></li>
+        <li><a href="/login/<%= user.username %>/connect?name=<%= user.name %>&profileimage=<%= user.profileimage %>">Connect Requests</a></li>
+        <li class="active"><a href="/login/<%= user.username %>/connected?name=<%= user.name %>&profileimage=<%= user.profileimage %>">Connected People</a></li>
         <li><a href="/login/<%= user.username %>/photos?name=<%= user.name %>&profileimage=<%= user.profileimage %>">Photos</a></li>
-        <li ><a href="/login/<%= user.username %>/addPost?name=<%= user.name %>&profileimage=<%= user.profileimage %>">Add Post</a></li>
+        <li ><a href ="/login/<%= user.username %>/addPost?name=<%= user.name %>&profileimage=<%= user.profileimage %>">Add Post</a></li>
      
         <li><a style="color: red;font-weight: 900;" href="/login/<%= user.username %>/logout">Logout</a></li>
       </ul><br>
@@ -67,64 +67,38 @@
     </div>
     <!-- add post section -->
     <div class="col-sm-9" style="margin-left:25%;">
-      <h4><small>YOUR Connect Requests</small></h4>
+      <h4><small>PEOPLE AROUND YOU</small></h4>
       <hr>
-      <ul>
-        <% if(requestStatus){ %>
-        <li>
-            <div style="font-size: larger;color: chartreuse;font-weight: 900;">
-               
-                <%= requestStatus %>
-              
-                <hr>
-            </div>
-        </li>
-        <% } %>
-        <% if(connectRequest){ %>
-        <li>
-            <div style="font-size: larger;color:mediumblue;font-weight: 900;">
-              
-                <%= connectRequest %>
-                
-                <hr>
-            </div>
-        </li>
-        <% } %>
-    </ul>
+      <div style="font-size: larger;color: chartreuse;font-weight: 900;">
+        <% if(friendStatus){ %>
+           <%= friendStatus %>
+         <% } %>
+         <hr>
+     </div>
      <div class="container-fluid" style="font-size: larger;font-weight: 500;color: darkblue;">
      <div class="row">
       <div class="col-md-3 ">Name</div>
-      <div class="col-md-3 ">Username</div>
+      <div class="col-md-6 ">Username</div>
       <div class="col-md-3 ">Profile Picture</div>
-      <div class="col-md-3 "></div>
     </div>
   </div>
   <hr>
-      <% if(connect){ %>
-     
-       <% for(var i=0;i<connect.request.length;i++){ %>
-        <div class="container-fluid" style="font-size:larger;font-weight: 800;">
-        <div class="row" style="border-bottom:1px solid lightgrey;font-size:larger;font-weight: 800;">
-          <div class="col-md-3 "><%= connect.request[i].name %></div>
-          <div class="col-md-3 ">
-            <a href="/login/<%= user.username %>/friend/<%= connect.request[i].username %>?name=<%= user.name %>&profileimage=<%= user.profileimage %>&friend=<%= connect.request[i].name %>&friendimage=<%= connect.request[i].profileimage %>">
-            <%= connect.request[i].username %>
+      <% if(people){ %>
+      <div class="container-fluid" style="font-size:larger;font-weight: 800;">
+       <% for(var i=0;i<people.length;i++){ %>
+        <% if(people[i].username != user.username ){ %>
+        <div class="row" style="border-bottom:1px solid lightgrey;">
+          <div class="col-md-3 "><%= people[i].name %></div>
+          <div class="col-md-6 ">
+            <a href="/login/<%= user.username %>/friend/<%= people[i].username %>?name=<%= user.name %>&profileimage=<%= user.profileimage %>&friend=<%= people[i].name %>&friendimage=<%= people[i].profileimage %>">
+            <%= people[i].username %>
             </a>
           </div>
           <div class="col-md-3 ">
-            <img style="width:100px;height:100px;margin:5px;" src="<%= connect.request[i].profileimage %>">
-          </div>
-          <div class="col-md-3 ">
-            
-             <a href="/login/<%= user.username %>/accept/<%= connect.request[i].username %>?name=<%= user.name %>&profileimage=<%= user.profileimage %>" style="color: white;font-weight: 900;">
-             <button  class="btn btn-primary" style="margin-top: 20px;" >
-             Accept Connect Request 
-             </button></a>
-           
+            <img style="width:100px;height:100px;margin:5px;" src="<%= people[i].profileimage %>">
           </div>
         </div>
-        </div>
-    
+        <% } %>
         <% } %>
       </div>
       <% } %>
@@ -132,6 +106,10 @@
     </div>
   </div>
 </div>
+
+<!-- <footer class="container-fluid" style="z-index: 100;">
+  <p>Footer Text</p>
+</footer> -->
 
 </body>
 </html>

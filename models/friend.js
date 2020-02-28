@@ -11,7 +11,7 @@ var db = mongoose.connection;
 
 // post schema
 
-var PeopleSchema = mongoose.Schema({
+var FriendSchema = mongoose.Schema({
     user : {
         type : String,
         require : true
@@ -21,6 +21,6 @@ var PeopleSchema = mongoose.Schema({
     }]
 });
 
-PeopleSchema.plugin(uniqueValidator);
+FriendSchema.plugin(uniqueValidator);
 
-var People = module.exports = mongoose.model('People',PeopleSchema);
+var Friend = module.exports = mongoose.model('Friend',FriendSchema);

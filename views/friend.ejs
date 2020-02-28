@@ -1,4 +1,4 @@
-<% var user,friend; %>
+<% var user,friend,friendStatus; %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,6 +49,7 @@
         <li ><a href="/login/<%= user.username %>/home">Home</a></li>
         <li class="active"><a href="/login/<%= user.username %>/people?name=<%= user.name %>&profileimage=<%= user.profileimage %>">People</a></li>
         <li><a href="/login/<%= user.username %>/connect?name=<%= user.name %>&profileimage=<%= user.profileimage %>">Connect Requests</a></li>
+        <li><a href="/login/<%= user.username %>/connected?name=<%= user.name %>&profileimage=<%= user.profileimage %>">Connected People</a></li>
         <li><a href="/login/<%= user.username %>/photos?name=<%= user.name %>&profileimage=<%= user.profileimage %>">Photos</a></li>
         <li ><a href="/login/<%= user.username %>/addPost?name=<%= user.name %>&profileimage=<%= user.profileimage %>">Add Post</a></li>
       
@@ -91,15 +92,33 @@
         </div>
         <% } %>
         
-        <form method="post" action="/login/<%= user.username %>/friend/<%= friend.username %>?name=<%= user.name %>&profileimage=<%= user.profileimage %>&friend=<%= friend.name %>&friendimage=<%= friend.profileimage %>">
+       <!--  <form method="get" action="/login/<%= user.username %>/friend/<%= friend.username %>?name=<%= user.name %>&profileimage=<%= user.profileimage %>&friend=<%= friend.name %>&friendimage=<%= friend.profileimage %>"> -->
             <div class="row" style="font-weight:900;font-size:5vh;">
                 <div class="col-md-12 ">
-                <button type="submit"  onclick="sent()" class="btn btn-primary">
-                    <b id="request">Connect</b>
-                </button>
+                <% if(friendStatus == 0){ %>
+                <a href="/login/<%= user.username %>/friend/connect/<%= friend.username %>?name=<%= user.name %>&profileimage=<%= user.profileimage %>&friend=<%= friend.name %>&friendimage=<%= friend.profileimage %>">
+                  <button  class="btn btn-primary">
+                      <b id="request">Connect Request</b>
+                  </button>
+                </a>
+                <% } %>
+                <% if(friendStatus == 1) { %>
+               <a href="/login/<%= user.username %>/friend/delete/<%= friend.username %>?name=<%= user.name %>&profileimage=<%= user.profileimage %>&friend=<%= friend.name %>&friendimage=<%= friend.profileimage %>">
+                  <button  class="btn btn-primary">
+                     <b id="request">Cancel Request</b>
+                 </button>
+               </a>
+               <% } %>
+               <% if(friendStatus == 2) { %>
+                <a href="/login/<%= user.username %>/friend/disconnect/<%= friend.username %>?name=<%= user.name %>&profileimage=<%= user.profileimage %>&friend=<%= friend.name %>&friendimage=<%= friend.profileimage %>">
+                   <button  class="btn btn-primary">
+                      <b id="request">Disconnect</b>
+                  </button>
+                </a>
+                <% } %>
                 </div>
             </div>
-        </form>
+        <!-- </form> -->
     </center>
     </div>
   <hr>
@@ -110,8 +129,3 @@
 
 </body>
 </html>
-<script>
-    function sent(){
-        document.getElementById("request").innerHTML = "Sent";
-    }
-</script>

@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var expressValidator = require('express-validator');
+var Friend = require('../models/friend');
 //handle sessions
 router.use(session({
   secret:'secret', // this is to encrypt and decrypt all the
@@ -102,11 +103,22 @@ router.post('/',upload.single('profileimage'),(req,res) => {
             if(err){
              console.log("error in createuser : ",err);
             }
-            console.log("user registered : ",user);
-            req.session.user = user;
-            //res.render('home',{user : user});
-            res.redirect('/login/'+user.username+'/home');
-           /*  res.redirect('/login/'+user.username+'/home'); */
+            else{
+               var friend = new Friend({
+                user : req.body.username,
+                friend :  req.body.username
+              });
+              friend.save((err,friend)=>{
+                 if(err){
+                  console.log("error in createuser : ",err);
+                 }
+                 else {
+                  console.log("user registered : ",user);
+                  req.session.user = user;
+                  res.redirect('/login/'+user.username+'/home');
+                 }
+              });//saving self in friend 
+            }//else
           });//create-user
         }//else
       });//findone- username

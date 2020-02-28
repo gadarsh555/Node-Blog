@@ -8,6 +8,7 @@ var upload = multer({dest:'./public/uploads/postimage'});
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var Friend = require('../models/friend');
 
 //handle sessions
 router.use(session({
