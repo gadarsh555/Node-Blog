@@ -13,7 +13,7 @@ var indexRouter = require('./routes/index');
 /* var usersRouter = require('./routes/users'); */
 var loginRouter = require('./routes/login');
 var friendRouter = require('./routes/friend');
-var friendRouter = require('./routes/feed');
+var feedRouter = require('./routes/feed');
 
 var app = express();
 
@@ -71,6 +71,7 @@ app.use('/', indexRouter);
 //app.use('/users', usersRouter);
 app.use('/login',loginRouter);
 app.use('/login',friendRouter);
+app.use('/login',feedRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

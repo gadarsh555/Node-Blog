@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var expressValidator = require('express-validator');
 var Friend = require('../models/friend');
+var Post = require('../models/post');
 //handle sessions
 router.use(session({
   secret:'secret', // this is to encrypt and decrypt all the
@@ -114,8 +115,22 @@ router.post('/',upload.single('profileimage'),(req,res) => {
                  }
                  else {
                   console.log("user registered : ",user);
-                  req.session.user = user;
-                  res.redirect('/login/'+user.username+'/home');
+                  //adding user in posts 
+                  var post = new Post({
+                    "postedby" : req.body.username,
+                    "feed" : []
+               });
+              
+                post.save((err,post)=>{
+                    if(err){
+                      console.log("error in saving in databse : ",err);
+                    }//if
+                    else{
+                      console.log("added user in post db",post);
+                      req.session.user = user;
+                      res.redirect('/login/'+user.username+'/home');
+                    }//else
+                });//post saving in db                  
                  }
               });//saving self in friend 
             }//else

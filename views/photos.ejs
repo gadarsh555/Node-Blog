@@ -81,13 +81,13 @@
   <!-- Projects Row -->
   <div class="row">
     <% if(post) { %>
-    <% for(var i=0;i<post.length;i++){ %>
+    <% for(var i=0;i<post.feed.length;i++){ %>
     <div class="col-md-4 portfolio-item">
       <a href="#">
-        <img style="width:400px;height:300px;" class="img-responsive" src="<%= post[i].postimage %>">
+        <img style="width:400px;height:300px;" class="img-responsive" src="<%= post.feed[i].postimage %>">
       </a>
       <center>
-      <h3>Title : <%= post[i].title %></h3>
+      <h3>Title : <%= post.feed[i].title %></h3>
     </center>
     </div>
     <% } %>

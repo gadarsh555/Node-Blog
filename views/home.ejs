@@ -1,3 +1,4 @@
+<% var user,post,friendData,reaction; %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +23,10 @@
       background-color: #555;
       color: white;
       padding: 15px;
+    }
+
+    .btn-color{
+      color: indigo;
     }
     
     /* On small screens, set height to 'auto' for sidenav and grid */
@@ -64,70 +69,93 @@
       </div>
     </div>
 
-    <div class="col-sm-9" style="margin-left:25%;">
-      <h4><small>RECENT POSTS</small></h4>
-      <hr>
-      <h2>I Love Food</h2>
-      <h5><span class="glyphicon glyphicon-time"></span> Post by Jane Dane, Sep 27, 2015.</h5>
-      <h5><span class="label label-danger">Food</span> <span class="label label-primary">Ipsum</span></h5><br>
-      <p>Food is my passion. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <br><br>
-      
-      <h4><small>RECENT POSTS</small></h4>
-      <hr>
-      <h2>Officially Blogging</h2>
-      <h5><span class="glyphicon glyphicon-time"></span> Post by John Doe, Sep 24, 2015.</h5>
-      <h5><span class="label label-success">Lorem</span></h5><br>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <hr>
-
-      <h4>Leave a Comment:</h4>
-      <form role="form">
-        <div class="form-group">
-          <textarea class="form-control" rows="3" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-success">Submit</button>
-      </form>
-      <br><br>
-      
-      <p><span class="badge">2</span> Comments:</p><br>
-      
-      <div class="row">
-        <div class="col-sm-2 text-center">
-          <img src="bandmember.jpg" class="img-circle" height="65" width="65" alt="Avatar">
-        </div>
-        <div class="col-sm-10">
-          <h4>Anja <small>Sep 29, 2015, 9:12 PM</small></h4>
-          <p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <br>
-        </div>
-        <div class="col-sm-2 text-center">
-          <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
-        </div>
-        <div class="col-sm-10">
-          <h4>John Row <small>Sep 25, 2015, 8:25 PM</small></h4>
-          <p>I am so happy for you man! Finally. I am looking forward to read about your trendy life. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <br>
-          <p><span class="badge">1</span> Comment:</p><br>
-          <div class="row">
-            <div class="col-sm-2 text-center">
-              <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+    <div class="col-sm-9" style="margin-left:25%;font-size:large;"><!-- body -->
+         <div style="font-size:xx-large;margin-left:36%;position:relative;">Recent Posts</div>
+         <% if(post){ %>
+          <% for(var i=0;i<post.length;i++){ %>
+            <% for(var j=0;j<post[i].feed.length;j++){ %>
+         <div><!-- posts -->
+            <div class="row">
+                <div class="col-sm-1"><img style="width:100px;height:100px;" src="<%= friendData[i].profileimage %>"></div>
+                  <div class="col-sm-4" style="margin-left:2%;">
+                  <div class="row" style="font-weight: 900;" ><%= friendData[i].name %>&nbsp;(@<%= post[i].postedby %>)</div>
+                  <div class="row"><%= post[i].feed[j].postdate %></div>
+                </div>
             </div>
-            <div class="col-xs-10">
-              <h4>Nested Bro <small>Sep 25, 2015, 8:28 PM</small></h4>
-              <p>Me too! WOW!</p>
-              <br>
+          
+            <div class="row">
+              <div class="col-sm-6" style="margin-left:22%" >
+                <div class="col-sm-12" >
+                  <div style="font-weight: 900;" class="row"><%= post[i].feed[j].title %></div>
+                  <div class="row" ><%= post[i].feed[j].text %></div>
+                </div>
+                <img style="width:550px;height:350px;margin: 1%;" src="<%= post[i].feed[j].postimage %>">
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+          
+            <div class="row">
+              <div style="margin-left:24%">
 
-<!-- <footer class="container-fluid" style="z-index: 100;">
-  <p>Footer Text</p>
-</footer> -->
+                   <% if(reaction[i][j] == null) { %> <!-- null case -->
+                   <a href="">
+                   <button style="font-weight:900;width:15%;margin-right:5%;" class="col-sm-3">
+                     <%= post[i].feed[j].riseup %>0&nbsp;(Riseups)
+                    </button>
+                    </a>
+                    <a href="">
+                    <button style="font-weight: 900;width:15%;margin-right:5%;" class="col-sm-3">
+                      <%= post[i].feed[j].falldown %>0&nbsp;(Falldowns)
+                    </button>
+                    </a>
+                    <% } %><!-- null case -->
 
+                    <% if(reaction[i][j] != null) { %> <!-- not null case -->
+                    <a href="/login/:id/riseup?name=<%= user.name %>&profileimage=<%= user.profileimage %>">
+                      <button style="font-weight:900;width:15%;margin-right:5%;" class="col-sm-3
+                      <% if(reaction[i][j] == true) { %>
+                      <%= btn-color %>
+                      <% } %>
+                      ">
+                        <%if(post[i].feed[j].riseup ==  null){ %>
+                        <%= 0 %>
+                        <% } else {%>
+                        <%= post[i].feed[j].riseup %>
+                        <% } %>
+                        &nbsp;(Riseups)
+                       </button>
+                       </a>
+                    <a href="/login/:id/falldown?name=<%= user.name %>&profileimage=<%= user.profileimage %>">
+                      <button style="font-weight: 900;width:15%;margin-right:5%;" class="col-sm-3 
+                      <% if(reaction[i][j] == false) { %>
+                      <%= btn-color %>
+                      <% } %>
+                       ">
+                        <%if(post[i].feed[j].falldown ==  null){ %>
+                          <%= 0 %>
+                          <% } else {%>
+                          <%= post[i].feed[j].falldown %>
+                          <% } %>
+                        &nbsp;(Falldowns)
+                      </button>
+                      </a>
+                      <% } %> <!-- not null case -->
+                      
+                    <a href="/login/:id/share?name=<%= user.name %>&profileimage=<%= user.profileimage %>">
+                    <button style="font-weight: 900;width:15%;" class="col-sm-2">
+                      Share
+                    </button>
+                    </a>
+              </div>
+            </div>
+
+            <div class="row" style="border-bottom:2px solid dimgray;margin:2%;">
+              <div class="col-sm-9">comment</div>
+            </div>
+        </div><!-- posts -->
+             <% } %>
+           <% } %>
+        <% } %>
+    </div><!-- body -->
+     
 </body>
 </html>

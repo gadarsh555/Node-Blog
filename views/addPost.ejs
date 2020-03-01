@@ -75,7 +75,7 @@
           <% } %>
           <hr>
       </div>
-      <form method="POST" enctype="multipart/form-data" action="/login/<%= user.username %>/addPost?profileimage=<%= user.profileimage %>" style="font-size: larger;">
+      <form method="POST" enctype="multipart/form-data" action="/login/<%= user.username %>/addPost?name=<%= user.name %>&profileimage=<%= user.profileimage %>" style="font-size: larger;">
         <!-- <div class="form-group">
             <label>Add a Title or Caption</label>
             <input type="text" class="form-control" name="postedby" placeholder="Enter title">

@@ -16,31 +16,32 @@ var PostSchema = mongoose.Schema({
         type : String,
         require : true
     },
-    title : {
-        type : String,
-        required: true,
-        index : true
-    },
-    text : {
-        type : String,
-        required: true,
-        unique: true
-    },
-    postimage : {
-        type : String
-    },
-    riseup : {
-        type : Number
-    },
-    falldown : {
-        type : Number
-    },
-    postdate : {
-        type : String
-    },
-    posttime : {
-        type : String
-    }
+    feed : [{
+                postid : {
+                    type : String,
+                    required : true
+                },
+                title : {
+                    type : String,
+                    required: true,
+                    index : true
+                },
+                text : {
+                    type : String
+                },
+                postimage : {
+                    type : String
+                },
+                postdate : {
+                    type : String
+                },
+                posttime : {
+                    type : String
+                },
+                timestamp : {
+                    type : Number
+                }
+            }]
 });
 
 PostSchema.plugin(uniqueValidator);
