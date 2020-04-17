@@ -1,13 +1,13 @@
 var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 
-mongoose.connect('mongodb://localhost/nodeblog', {
+/* mongoose.connect('mongodb://localhost/nodeblog', {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	useUnifiedTopology: true
 });
 
-var db = mongoose.connection;
+var db = mongoose.connection; */
 
 // post schema
 
