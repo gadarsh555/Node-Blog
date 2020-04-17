@@ -1,5 +1,11 @@
 var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
+mongoose.connect(db, {
+	useNewUrlParser: true,
+	useFindAndModify: false,
+	useCreateIndex: true,
+	useUnifiedTopology: true
+});
 
 /* mongoose.connect('mongodb://localhost/nodeblog', {
 	useNewUrlParser: true,
