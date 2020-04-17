@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
+const db = 'mongodb+srv://gadarsh555:ucantcme@social-network-a0bj4.mongodb.net/test?retryWrites=true&w=majority;';
+
 mongoose.connect(db, {
 	useNewUrlParser: true,
 	useFindAndModify: false,
